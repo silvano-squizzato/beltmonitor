@@ -20,5 +20,5 @@ public class BeltSegment {
   Sensor inSensor;
   Sensor outSensor;
   long inEventCounter = 0;
-  long outCounter = 0;
+  long outEventCounter = 0;
 }
