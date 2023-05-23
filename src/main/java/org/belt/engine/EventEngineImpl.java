@@ -3,6 +3,8 @@ package org.belt.engine;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.belt.model.Alarm;
+import org.belt.model.AlarmType;
 import org.belt.model.Belt;
 import org.belt.model.BeltSegment;
 import org.belt.model.Event;
@@ -10,6 +12,8 @@ import org.belt.model.ProcessResult;
 
 @Slf4j
 public class EventEngineImpl implements EventEngine {
+
+  public final long MAX_ITEMS_ON_BELT = 10;
 
   Belt belt;
 
@@ -21,7 +25,13 @@ public class EventEngineImpl implements EventEngine {
   public ProcessResult process(Event event) {
     log.info("Processing event=" + event);
     update(event);
-    ProcessResult processResult = new ProcessResult(new ArrayList<>(), "Processed event=" + event);
+    List<Alarm> alarms = new ArrayList<>();
+    long itemsInBelt = getItemsInBelt();
+    if (itemsInBelt >= MAX_ITEMS_ON_BELT) {
+      alarms.add(
+          new Alarm(AlarmType.MAX_ITEMS_ON_BELT, "The number of items in belt is " + itemsInBelt));
+    }
+    ProcessResult processResult = new ProcessResult(alarms, "Processed event=" + event);
     log.info("Completed processing event=" + event);
     return processResult;
   }
@@ -36,5 +46,17 @@ public class EventEngineImpl implements EventEngine {
         beltSegment.setOutEventCounter(beltSegment.getOutEventCounter() + 1);
       }
     }
+  }
+
+  public long getItemsInSegment(BeltSegment segment) {
+    return (segment.getInEventCounter() - segment.getOutEventCounter());
+  }
+
+  public long getItemsInBelt() {
+    long itemNumber = 0;
+    for (BeltSegment beltSegment : belt.getSegmentList()) {
+      itemNumber = itemNumber + getItemsInSegment(beltSegment);
+    }
+    return itemNumber;
   }
 }
