@@ -7,6 +7,7 @@ import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.belt.error.ResourceNotFoundException;
 import org.belt.model.Event;
+import org.belt.service.EventService;
 import org.belt.service.PersistenceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,9 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class EventController {
 
   PersistenceService persistenceService;
+  EventService eventService;
 
-  public EventController(PersistenceService persistenceService) {
+  public EventController(PersistenceService persistenceService, EventService eventService) {
     this.persistenceService = persistenceService;
+    this.eventService = eventService;
+
   }
 
   @GetMapping("/events")
@@ -48,7 +52,9 @@ public class EventController {
   @PostMapping("/events")
   public Event createEvent(@Valid @RequestBody Event event) {
     log.info("Creating event=" + event);
-    return persistenceService.saveEvent(event);
+    Event savedEvent = persistenceService.saveEvent(event);
+    eventService.process(savedEvent);
+    return savedEvent;
   }
 
   @DeleteMapping("/events/{id}")
