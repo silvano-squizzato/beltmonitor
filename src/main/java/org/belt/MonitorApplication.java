@@ -7,15 +7,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class BeltMonitorApplication {
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	}
+public class MonitorApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BeltMonitorApplication.class, args);
-		System.out.println("BeltMonitoring App started");
-	}
+  @Bean
+  public RestTemplate restTemplate(RestTemplateBuilder builder) {
+    return builder.build();
+  }
+
+  public static void main(String[] args) {
+    SpringApplication.run(MonitorApplication.class, args);
+    System.out.println("BeltMonitoring App started");
+  }
 
 }

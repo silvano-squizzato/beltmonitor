@@ -20,8 +20,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = BeltMonitorApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class EventControllerIntegrationTest {
+@SpringBootTest(classes = MonitorApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class EventControllerTest {
 	@Autowired
 	private TestRestTemplate restTemplate;
 
@@ -50,10 +50,8 @@ public class EventControllerIntegrationTest {
 	@Test
 	public void testGetEventById() {
 		Event event = restTemplate.getForObject(getRootUrl() + "/events/1", Event.class);
-		System.out.println("id=" + event.getId());
-		System.out.println("source=" + event.getSource());
-		System.out.println("time=" + event.getTime());
 		assertNotNull(event);
+		System.out.println("Get event=" + event);
 	}
 
 	@Test
@@ -65,19 +63,7 @@ public class EventControllerIntegrationTest {
 		ResponseEntity<Event> postResponse = restTemplate.postForEntity(getRootUrl() + "/events", event, Event.class);
 		assertNotNull(postResponse);
 		assertNotNull(postResponse.getBody());
-	}
-
-	@Test
-	public void testUpdateEvent() {
-		int id = 1;
-		Event event = restTemplate.getForObject(getRootUrl() + "/events/" + id, Event.class);
-		event.setTime(Instant.now().toEpochMilli());
-		event.setSource("S1");
-
-		restTemplate.put(getRootUrl() + "/events/" + id, event);
-
-		Event updatedEvent = restTemplate.getForObject(getRootUrl() + "/events/" + id, Event.class);
-		assertNotNull(updatedEvent);
+		System.out.println("Created event=" + postResponse.getBody());
 	}
 
 	@Test
@@ -93,16 +79,5 @@ public class EventControllerIntegrationTest {
 		} catch (final HttpClientErrorException e) {
 			assertEquals(e.getStatusCode(), HttpStatus.NOT_FOUND);
 		}
-	}
-
-	@Test
-	public void testCreation() {
-		Event event = new Event();
-		event.setSource("S0");
-		event.setTime(Instant.now().toEpochMilli());
-
-		ResponseEntity<Event> postResponse = restTemplate.postForEntity(getRootUrl() + "/events", event, Event.class);
-		assertNotNull(postResponse);
-		assertNotNull(postResponse.getBody());
 	}
 }

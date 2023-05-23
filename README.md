@@ -1,2 +1,1 @@
-# beltmonitor
-Belt monitoring system
+# Belt monitoring system
