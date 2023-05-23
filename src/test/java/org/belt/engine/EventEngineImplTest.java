@@ -8,6 +8,8 @@ import org.belt.model.Belt;
 import org.belt.model.BeltSegment;
 import org.belt.model.Event;
 import org.belt.model.Sensor;
+import org.belt.service.EventEngine;
+import org.belt.service.EventEngineImpl;
 import org.junit.jupiter.api.Test;
 
 public class EventEngineImplTest {

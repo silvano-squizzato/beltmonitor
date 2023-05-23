@@ -29,7 +29,6 @@ public class EventController {
   public EventController(PersistenceService persistenceService, EventService eventService) {
     this.persistenceService = persistenceService;
     this.eventService = eventService;
-
   }
 
   @GetMapping("/events")
@@ -44,7 +43,7 @@ public class EventController {
     log.info("Getting eventId=" + id);
     Event event = persistenceService.getEventById(id);
     if (event == null) {
-      throw new ResourceNotFoundException("Event not found for this id :: " + id);
+      throw new ResourceNotFoundException("Event not found for id=" + id);
     }
     return ResponseEntity.ok().body(event);
   }

@@ -9,6 +9,8 @@ public interface PersistenceService {
 
   Event getEventById(Long id);
 
+  Event getLastEventBySensorId(String sensorId);
+
   Event saveEvent(Event event);
 
   void deleteEvent(Long id);

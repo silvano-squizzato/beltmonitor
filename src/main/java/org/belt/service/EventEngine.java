@@ -1,6 +1,5 @@
-package org.belt.engine;
+package org.belt.service;
 
-import org.belt.model.Belt;
 import org.belt.model.Event;
 import org.belt.model.ProcessResult;
 
