@@ -15,13 +15,13 @@ public class Event {
 
   private long id;
   private long time;
-  private String source;
+  private String sensorId;
 
   public Event() {
   }
 
-  public Event(String source, long time) {
-    this.source = source;
+  public Event(String sensorId, long time) {
+    this.sensorId = sensorId;
     this.time = time;
   }
 
@@ -31,9 +31,9 @@ public class Event {
     return id;
   }
 
-  @Column(name = "source", nullable = false)
-  public String getSource() {
-    return source;
+  @Column(name = "sensorId", nullable = false)
+  public String getSensorId() {
+    return sensorId;
   }
 
   @Column(name = "time", nullable = false)

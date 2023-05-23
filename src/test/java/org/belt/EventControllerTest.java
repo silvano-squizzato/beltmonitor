@@ -57,7 +57,7 @@ public class EventControllerTest {
 	@Test
 	public void testCreateEvent() {
 		Event event = new Event();
-		event.setSource("S0");
+		event.setSensorId("S0");
 		event.setTime(Instant.now().toEpochMilli());
 
 		ResponseEntity<Event> postResponse = restTemplate.postForEntity(getRootUrl() + "/events", event, Event.class);
