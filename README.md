@@ -19,7 +19,7 @@ Alarms are generated when:
 - The belt never stops
 - Items are always introduced on the belt from the first segment of the belt
 - Items are moving separately with no overlapping
-- The number of items on a segment at any given time is the difference between the number of events at the exit sensor minus the number of events at the entry sensor for the segment
+- The number of items on a segment at any given time is the difference between the number of events at the entry sensor minus the number of events at the exit sensor for the segment
 - The number of items transiting on the belt is the sum of the items on each segment of the belt
 - An item is considered stuck on a segment if it does not clear the segment length within the expected clearance time
 
