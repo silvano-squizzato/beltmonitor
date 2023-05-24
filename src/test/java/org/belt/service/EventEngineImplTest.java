@@ -1,4 +1,4 @@
-package org.belt.engine;
+package org.belt.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -8,8 +8,6 @@ import org.belt.model.Belt;
 import org.belt.model.BeltSegment;
 import org.belt.model.Event;
 import org.belt.model.Sensor;
-import org.belt.service.EventEngine;
-import org.belt.service.EventEngineImpl;
 import org.junit.jupiter.api.Test;
 
 public class EventEngineImplTest {
@@ -59,6 +57,15 @@ public class EventEngineImplTest {
     engine.process(new Event("S1", 2200));
     engine.process(new Event("S2", 3000));
     assertEquals(5, engine.getItemsInBelt());
+  }
+
+  @Test
+  public void getClearanceTimeInSeconds() {
+    Belt belt = getBelt();
+    EventEngineImpl engine = new EventEngineImpl(belt);
+    double expectedClearanceTimeForFirstSegment = 1.0;
+    assertEquals(expectedClearanceTimeForFirstSegment,
+        engine.getClearanceTimeInSeconds(belt.getSegmentList().get(0)));
   }
 
   private Belt getBelt() {

@@ -33,11 +33,6 @@ public class PersistenceServiceImpl implements PersistenceService {
   }
 
   @Override
-  public void deleteEvent(Long id) {
-    repository.deleteById(id);
-  }
-
-  @Override
   public Event getLastEventBySensorId(String sensorId) {
     List<Event> events = repository.findFirstBySensorIdOrderByTimeDesc(sensorId);
     return events.get(0);

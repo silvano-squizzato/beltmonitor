@@ -15,9 +15,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class EventServiceImpl implements EventService {
 
+  PersistenceService persistenceService;
+
   EventEngine eventEngine;
 
-  public EventServiceImpl() {
+  public EventServiceImpl(PersistenceService persistenceService) {
+    this.persistenceService = persistenceService;
     Belt belt = getBelt();
     eventEngine = new EventEngineImpl(belt);
   }

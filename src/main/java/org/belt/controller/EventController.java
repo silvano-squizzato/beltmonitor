@@ -1,16 +1,13 @@
 package org.belt.controller;
 
 import jakarta.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.belt.error.ResourceNotFoundException;
 import org.belt.model.Event;
 import org.belt.service.EventService;
 import org.belt.service.PersistenceService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,14 +51,5 @@ public class EventController {
     Event savedEvent = persistenceService.saveEvent(event);
     eventService.process(savedEvent);
     return savedEvent;
-  }
-
-  @DeleteMapping("/events/{id}")
-  public Map<String, Boolean> deleteEvent(@PathVariable(value = "id") Long id) {
-    log.info("Deleting eventId=" + id);
-    persistenceService.deleteEvent(id);
-    Map<String, Boolean> response = new HashMap<>();
-    response.put("deleted", Boolean.TRUE);
-    return response;
   }
 }
