@@ -6,6 +6,7 @@ Alarms are generated when:
 - an item is stuck between 2 consecutive sensors
 
 # Definitions
+![plot](./docs/belt.png)
 - A belt is modelled as a series of adjacent segments each of them with a sensor in entrance and exit where items are carried at a constant motion speed
 - A segment is a portion of the belt characterised by a length, a pair of controlling sensors and a counter for the number of events related to each sensor since monitoring starts
 - A sensor is a device able to detect when an item transits on the belt and to send a measurement as an event
@@ -28,7 +29,7 @@ The EventCollector has a PersistenceService that allows events to be stored in m
 
 # Documentation
 More documentation is available in the docs folder
-- belt_design.pdf
+- belt.png
 - belt.postman_collection.json
 - README.pdf
 
