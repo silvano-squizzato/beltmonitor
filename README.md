@@ -14,7 +14,7 @@ Alarms are generated when:
 - The clearance time for a segment is the time an item entering the segment will take to clear the segment length and is equal to its length divided by the belt motion speed
 - An alarm is an anomalous condition detected on the belt when events are processed
 
-# Assumption
+# Assumptions
 - The motion speed of the belt never changes and keeps one direction only
 - The belt never stops
 - Items are always introduced on the belt from the first segment of the belt
